@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>회계·딜·택스 브리핑 — 2026.07.22</title>
+<meta name="description" content="오늘의 회계, 인수합병(딜), 세무 관련 핵심 뉴스를 정리한 데일리 브리핑">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --surface: #ffffff;
+    --panel: #efebe1;
+    --ink: #1c1b18;
+    --body: #4a473f;
+    --muted: #85806f;
+    --line: #ded9cb;
+    --line-strong: #cac4b1;
+
+    --accounting-a: #e8a93d;
+    --accounting-b: #c07f19;
+    --deal-a: #d2491f;
+    --deal-b: #a3350f;
+    --tax-a: #8c3324;
+    --tax-b: #5e1f16;
+
+    --cover-1: #1c1b18;
+    --cover-2: #34302a;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15140f;
+      --surface: #1c1a14;
+      --panel: #221f17;
+      --ink: #f2efe4;
+      --body: #c7c2b3;
+      --muted: #8b8575;
+      --line: #35311f;
+      --line-strong: #47412a;
+
+      --accounting-a: #eab654;
+      --accounting-b: #b9822a;
+      --deal-a: #e2691f;
+      --deal-b: #b0430f;
+      --tax-a: #a8402a;
+      --tax-b: #74281a;
+
+      --cover-1: #0e0d0a;
+      --cover-2: #221f17;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15140f;
+    --surface: #1c1a14;
+    --panel: #221f17;
+    --ink: #f2efe4;
+    --body: #c7c2b3;
+    --muted: #8b8575;
+    --line: #35311f;
+    --line-strong: #47412a;
+    --accounting-a: #eab654;
+    --accounting-b: #b9822a;
+    --deal-a: #e2691f;
+    --deal-b: #b0430f;
+    --tax-a: #a8402a;
+    --tax-b: #74281a;
+    --cover-1: #0e0d0a;
+    --cover-2: #221f17;
+  }
+  :root[data-theme="light"] {
+    --bg: #faf8f3;
+    --surface: #ffffff;
+    --panel: #efebe1;
+    --ink: #1c1b18;
+    --body: #4a473f;
+    --muted: #85806f;
+    --line: #ded9cb;
+    --line-strong: #cac4b1;
+    --accounting-a: #e8a93d;
+    --accounting-b: #c07f19;
+    --deal-a: #d2491f;
+    --deal-b: #a3350f;
+    --tax-a: #8c3324;
+    --tax-b: #5e1f16;
+    --cover-1: #1c1b18;
+    --cover-2: #34302a;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--body);
+    font-family: 'Noto Sans KR', 'Malgun Gothic', -apple-system, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif {
+    font-family: Georgia, 'Iowan Old Style', 'Noto Serif KR', 'Batang', serif;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- Cover ---------- */
+  .cover {
+    background:
+      radial-gradient(ellipse 120% 90% at 15% -10%, rgba(210,73,31,0.35), transparent 55%),
+      radial-gradient(ellipse 100% 80% at 100% 10%, rgba(232,169,61,0.18), transparent 60%),
+      linear-gradient(155deg, var(--cover-1), var(--cover-2) 70%);
+    color: #f2efe4;
+    padding: 76px 0 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(242,239,228,0.05) 0 1px, transparent 1px 96px),
+      repeating-linear-gradient(0deg, rgba(242,239,228,0.05) 0 1px, transparent 1px 96px);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), transparent 85%);
+    pointer-events: none;
+  }
+  .cover-inner { position: relative; z-index: 1; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 12.5px;
+    color: rgba(242,239,228,0.65);
+    font-weight: 600;
+  }
+  .cover h1 {
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.18;
+    margin: 18px 0 0;
+    font-weight: 400;
+    text-wrap: balance;
+    max-width: 15ch;
+  }
+  .cover .desc {
+    margin: 22px 0 48px;
+    max-width: 52ch;
+    font-size: 15.5px;
+    color: rgba(242,239,228,0.78);
+  }
+  .cover-bar {
+    margin-top: 40px;
+    background: linear-gradient(90deg, var(--deal-a), var(--tax-b) 130%);
+    padding: 18px 0;
+  }
+  .cover-bar .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cover-bar strong { font-weight: 700; }
+  .cover-bar span.dim { color: rgba(255,255,255,0.75); font-size: 13.5px; }
+
+  /* ---------- Stat strip ---------- */
+  .stats {
+    padding: 44px 0 8px;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .stat-tile {
+    border-radius: 2px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .stat-top {
+    padding: 18px 20px 14px;
+    color: #fff;
+  }
+  .stat-tile:nth-child(1) .stat-top { background: linear-gradient(135deg, var(--accounting-a), var(--accounting-b)); }
+  .stat-tile:nth-child(2) .stat-top { background: linear-gradient(135deg, var(--deal-a), var(--deal-b)); }
+  .stat-tile:nth-child(3) .stat-top { background: linear-gradient(135deg, var(--tax-a), var(--tax-b)); }
+  .stat-figure {
+    font-family: Georgia, 'Noto Serif KR', serif;
+    font-size: 30px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+  }
+  .stat-label { font-size: 12.5px; margin-top: 4px; opacity: 0.92; }
+  .stat-bottom {
+    padding: 14px 20px 18px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* ---------- Section divider ---------- */
+  .section { margin-top: 56px; }
+  .section-bar {
+    color: #fff;
+    padding: 20px 0;
+  }
+  .section-bar.accounting { background: linear-gradient(90deg, var(--accounting-b), var(--accounting-a)); }
+  .section-bar.deal { background: linear-gradient(90deg, var(--deal-b), var(--deal-a)); }
+  .section-bar.tax { background: linear-gradient(90deg, var(--tax-b), var(--tax-a)); }
+  .section-bar .wrap {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .section-bar h2 {
+    font-weight: 400;
+    font-size: 24px;
+    margin: 0;
+  }
+  .section-bar .count {
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.85;
+  }
+
+  /* ---------- Article cards ---------- */
+  .cards { padding: 22px 0 4px; display: flex; flex-direction: column; gap: 14px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--card-accent, var(--deal-a));
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 20px;
+  }
+  .card.accounting { --card-accent: var(--accounting-b); }
+  .card.deal { --card-accent: var(--deal-a); }
+  .card.tax { --card-accent: var(--tax-b); }
+
+  .card-meta {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .card-meta .source { color: var(--ink); font-weight: 700; }
+  .card h3 {
+    grid-column: 1 / -1;
+    font-family: Georgia, 'Noto Serif KR', serif;
+    font-weight: 400;
+    font-size: 19px;
+    margin: 2px 0 2px;
+    line-height: 1.4;
+  }
+  .card h3 a { text-decoration: none; }
+  .card h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .card p {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--body);
+    max-width: 70ch;
+  }
+  .card .go {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--card-accent);
+    text-decoration: none;
+  }
+  .card .go:hover { text-decoration: underline; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    margin-top: 72px;
+    border-top: 1px solid var(--line-strong);
+    padding: 26px 0 48px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  footer .foot-mark {
+    font-family: Georgia, serif;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 13px;
+  }
+  footer .disclaimer { margin-top: 10px; max-width: 62ch; }
+
+  @media (max-width: 680px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .card { grid-template-columns: 1fr; }
+    .cover { padding-top: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-inner">
+    <div class="wrap">
+      <div class="eyebrow">Accounting · Deal · Tax — Daily Briefing</div>
+      <h1 class="serif">회계·딜·택스<br>브리핑</h1>
+      <p class="desc">오늘 확인해야 할 회계, 인수합병(딜), 세무 분야의 핵심 기사를 모았습니다. 각 기사의 원문 언론사로 이동해 전체 내용을 확인할 수 있습니다.</p>
+    </div>
+    <div class="cover-bar">
+      <div class="wrap">
+        <span><strong>2026년 7월 22일</strong></span>
+        <span class="dim">기사 9건 · 언론사 7곳 · 스냅샷 생성본</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap stats">
+  <div class="stats-grid">
+    <div class="stat-tile">
+      <div class="stat-top">
+        <div class="stat-figure">75건</div>
+        <div class="stat-label">2026년 상반기 상장사 M&amp;A</div>
+      </div>
+      <div class="stat-bottom">전년 동기 77건 대비 2.6%↓ · 한국예탁결제원 집계</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-top">
+        <div class="stat-figure">8.57조원</div>
+        <div class="stat-label">삼일PwC, M&amp;A 회계자문 1위</div>
+      </div>
+      <div class="stat-bottom">46건 자문 · 2026년 상반기 리그테이블 기준</div>
+    </div>
+    <div class="stat-tile">
+      <div class="stat-top">
+        <div class="stat-figure">+1%p</div>
+        <div class="stat-label">2026년 법인세율 전 구간 인상</div>
+      </div>
+      <div class="stat-bottom">2022년 인하분 원상복구 · 세수효과는 2027년부터</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap section">
+  <div class="section-bar accounting">
+    <div class="wrap">
+      <h2 class="serif">회계 — Accounting</h2>
+      <span class="count">3건</span>
+    </div>
+  </div>
+  <div class="cards">
+
+    <div class="card accounting">
+      <div class="card-meta"><span class="source">조세일보</span><span>2025.11.20</span></div>
+      <h3><a href="https://m.joseilbo.com/news/view.htm?newsid=557158" target="_blank" rel="noopener">빅4 회계법인 중 3곳 매출 증가…유일하게 내린 '딜로이트'</a></h3>
+      <p>2024회계연도 빅4 회계법인 전체 매출은 2조9565억원으로 전년비 2.9% 증가. PwC 1조5554억원, KPMG 8754억원, EY 7648억원, 딜로이트 6800억원(유일한 감소).</p>
+      <a class="go" href="https://m.joseilbo.com/news/view.htm?newsid=557158" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+    <div class="card accounting">
+      <div class="card-meta"><span class="source">한국세정신문</span><span>2025.12.16</span></div>
+      <h3><a href="https://www.taxtimes.co.kr/news/article.html?no=272856" target="_blank" rel="noopener">내년부터 '네트워크 회계법인'과의 비감사용역 계약도 공시해야</a></h3>
+      <p>금감원이 기업공시서식을 개정, 2026년 1월 1일부터 사업보고서에 감사인뿐 아니라 네트워크 회계법인과의 비감사용역 계약 현황도 기재하도록 의무화. 감사인 독립성 강화가 목표.</p>
+      <a class="go" href="https://www.taxtimes.co.kr/news/article.html?no=272856" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+    <div class="card accounting">
+      <div class="card-meta"><span class="source">포인트데일리</span><span>2025.11.27</span></div>
+      <h3><a href="https://www.pointdaily.co.kr/news/articleView.html?idxno=282111" target="_blank" rel="noopener">금감원, 2026년 감사인 선임 유의사항 안내</a></h3>
+      <p>회사 유형별 감사인 선임기한 준수를 당부. 선임기한·절차 위반으로 감사인이 지정된 회사가 2024년 310곳, 2025년(9월 기준) 290곳에 달해 설명회 등으로 안내 예정.</p>
+      <a class="go" href="https://www.pointdaily.co.kr/news/articleView.html?idxno=282111" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="wrap section">
+  <div class="section-bar deal">
+    <div class="wrap">
+      <h2 class="serif">딜 — Deal</h2>
+      <span class="count">3건</span>
+    </div>
+  </div>
+  <div class="cards">
+
+    <div class="card deal">
+      <div class="card-meta"><span class="source">뉴스핌</span><span>2026.07.22</span></div>
+      <h3><a href="https://www.newspim.com/news/view/20260722000406" target="_blank" rel="noopener">올 상반기 상장사 M&amp;A 75곳…전년비 2.6% 감소</a></h3>
+      <p>한국예탁결제원 집계 결과 합병이 62곳으로 최다, 코스닥 법인이 70.7% 차지. 주식매수청구대금은 54억원으로 전년비 82.9% 급감.</p>
+      <a class="go" href="https://www.newspim.com/news/view/20260722000406" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+    <div class="card deal">
+      <div class="card-meta"><span class="source">한국경제</span><span>2026.06.29</span></div>
+      <h3><a href="https://www.hankyung.com/amp/202606294319r" target="_blank" rel="noopener">삼일PwC, 회계자문 선두 굳히기…2위 놓고 안진·삼정 경쟁</a></h3>
+      <p>2026년 상반기 M&amp;A 회계자문 리그테이블: 삼일PwC 46건·8조5738억원 1위, 딜로이트안진 8건·4조6055억원 2위, 삼정KPMG 13건·3조2230억원 3위, EY한영 7건·7893억원 4위.</p>
+      <a class="go" href="https://www.hankyung.com/amp/202606294319r" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+    <div class="card deal">
+      <div class="card-meta"><span class="source">한국M&amp;A경제신문</span><span>2026.07.22</span></div>
+      <h3><a href="https://www.kmnanews.com/news/articleView.html?idxno=10407" target="_blank" rel="noopener">새우가 고래 삼키는 'SK스토아 매각'…넉 달 만에 심사대 다시 오른다</a></h3>
+      <p>패션 플랫폼 라포랩스가 SK텔레콤 보유 SK스토아 지분 100%(약 1100억원) 인수를 추진, 방송미디어진흥위원회 심사가 4개월 만에 재개.</p>
+      <a class="go" href="https://www.kmnanews.com/news/articleView.html?idxno=10407" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="wrap section">
+  <div class="section-bar tax">
+    <div class="wrap">
+      <h2 class="serif">택스 — Tax</h2>
+      <span class="count">3건</span>
+    </div>
+  </div>
+  <div class="cards">
+
+    <div class="card tax">
+      <div class="card-meta"><span class="source">세계일보</span><span>2025.12.02</span></div>
+      <h3><a href="https://www.segye.com/newsView/20251202519707" target="_blank" rel="noopener">2026년부터 법인세 전 구간 1%p 인상…예산부수법안 국회 통과</a></h3>
+      <p>과표 2억원 이하 10%, 2억~200억원 20%, 200억~3000억원 22%, 3000억원 초과 25%로 전 구간 인상. 2022년 인하분을 원상복구하는 조치이며 세수효과는 2027년부터.</p>
+      <a class="go" href="https://www.segye.com/newsView/20251202519707" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+    <div class="card tax">
+      <div class="card-meta"><span class="source">한국세정신문</span><span>2026.04.02</span></div>
+      <h3><a href="https://www.taxtimes.co.kr/news/article.html?no=274565" target="_blank" rel="noopener">"원할 때 조사받으세요" 국세청, '정기 세무조사 시기선택제' 시행</a></h3>
+      <p>4월부터 정기 세무조사 대상자가 안내문 수령 후 3개월 내에서 조사 착수 시기를 직접 선택 가능. 반복 과세되는 10개 유형은 "중점검증항목"으로 사전 공개.</p>
+      <a class="go" href="https://www.taxtimes.co.kr/news/article.html?no=274565" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+    <div class="card tax">
+      <div class="card-meta"><span class="source">한국세정신문</span><span>2026.07.01</span></div>
+      <h3><a href="https://www.taxtimes.co.kr/news/article.html?no=275762" target="_blank" rel="noopener">7월 세무일지…1기 부가세 확정신고·재산세 납부 챙겨야</a></h3>
+      <p>1기 부가가치세 확정신고·납부기한은 7월 27일. 재산세는 7월 16일~31일 중 주택분 절반과 건축물·항공기·선박분 부과, 기한 후 납부시 3% 가산세.</p>
+      <a class="go" href="https://www.taxtimes.co.kr/news/article.html?no=275762" target="_blank" rel="noopener">원문 보기 ↗</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div class="foot-mark">회계·딜·택스 브리핑</div>
+    <div class="disclaimer">이 페이지는 2026년 7월 22일 기준으로 각 언론사 원문을 요약해 구성한 스냅샷이며, 실시간으로 갱신되지 않습니다. 요약은 원문 기사를 바탕으로 작성되었으며 정확한 내용은 각 기사 원문을 참고해 주세요. 특정 회계법인·기업과의 제휴 또는 공식 발행물이 아닙니다.</div>
+  </footer>
+</div>
+
+</body>
+</html>
