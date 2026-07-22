@@ -25,6 +25,8 @@
     --tax-b: #5e1f16;
     --ai-a: #2f8f7a;
     --ai-b: #1c5a4d;
+    --search-a: #6b6a5f;
+    --search-b: #423f34;
 
     --cover-1: #1c1b18;
     --cover-2: #34302a;
@@ -49,6 +51,8 @@
       --tax-b: #74281a;
       --ai-a: #3aab93;
       --ai-b: #237a68;
+      --search-a: #9c9a8c;
+      --search-b: #706c5c;
 
       --cover-1: #0e0d0a;
       --cover-2: #221f17;
@@ -71,6 +75,8 @@
     --tax-b: #74281a;
     --ai-a: #3aab93;
     --ai-b: #237a68;
+    --search-a: #9c9a8c;
+    --search-b: #706c5c;
     --cover-1: #0e0d0a;
     --cover-2: #221f17;
   }
@@ -91,6 +97,8 @@
     --tax-b: #5e1f16;
     --ai-a: #2f8f7a;
     --ai-b: #1c5a4d;
+    --search-a: #6b6a5f;
+    --search-b: #423f34;
     --cover-1: #1c1b18;
     --cover-2: #34302a;
   }
@@ -213,6 +221,7 @@
   .section-bar.deal { background: linear-gradient(90deg, var(--deal-b), var(--deal-a)); }
   .section-bar.tax { background: linear-gradient(90deg, var(--tax-b), var(--tax-a)); }
   .section-bar.ai { background: linear-gradient(90deg, var(--ai-b), var(--ai-a)); }
+  .section-bar.search { background: linear-gradient(90deg, var(--search-b), var(--search-a)); }
   .section-bar .wrap {
     display: flex;
     align-items: baseline;
@@ -247,6 +256,7 @@
   .card.deal { --card-accent: var(--deal-a); }
   .card.tax { --card-accent: var(--tax-b); }
   .card.ai { --card-accent: var(--ai-b); }
+  .card.search { --card-accent: var(--search-b); }
 
   .card-meta {
     grid-column: 1 / -1;
@@ -286,6 +296,44 @@
     text-decoration: none;
   }
   .card .go:hover { text-decoration: underline; }
+
+  /* ---------- Live search ---------- */
+  .search-box {
+    display: flex;
+    gap: 10px;
+    padding: 22px 0 4px;
+  }
+  .search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 14px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 14.5px;
+    font-family: inherit;
+    border-radius: 2px;
+  }
+  .search-box input:focus {
+    outline: 2px solid var(--search-b);
+    outline-offset: 1px;
+  }
+  .search-box button {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 2px;
+    background: var(--search-b);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .search-box button:hover { background: var(--search-a); }
+  .search-box button:focus-visible,
+  .search-box input:focus-visible { outline: 2px solid var(--search-b); outline-offset: 1px; }
+  .search-status { color: var(--muted); font-size: 13.5px; padding: 4px 0 0; }
+  .search-note { color: var(--muted); font-size: 12.5px; padding: 2px 0 0; }
 
   /* ---------- Footer ---------- */
   footer {
@@ -352,6 +400,21 @@
       <div class="stat-bottom">2022년 인하분 원상복구 · 세수효과는 2027년부터</div>
     </div>
   </div>
+</div>
+
+<div class="wrap section">
+  <div class="section-bar search">
+    <div class="wrap">
+      <h2 class="serif">직접 검색 — Live Search</h2>
+      <span class="count">Naver News</span>
+    </div>
+  </div>
+  <div class="wrap search-box">
+    <input type="text" id="search-input" placeholder="예: 삼정KPMG, 법인세, 반도체 M&amp;A..." aria-label="뉴스 검색어">
+    <button id="search-btn" type="button">검색</button>
+  </div>
+  <p class="wrap search-note">아래 4개 섹션은 매일 고정 갱신되는 스냅샷이고, 이 검색창은 네이버 뉴스를 실시간으로 조회합니다.</p>
+  <div class="cards" id="search-results"></div>
 </div>
 
 <div class="wrap section">
@@ -492,6 +555,94 @@
     <div class="disclaimer">이 페이지는 2026년 7월 22일 기준으로 각 언론사 원문을 요약해 구성한 스냅샷이며, 실시간으로 갱신되지 않습니다. 요약은 원문 기사를 바탕으로 작성되었으며 정확한 내용은 각 기사 원문을 참고해 주세요. 특정 회계법인·기업과의 제휴 또는 공식 발행물이 아닙니다.</div>
   </footer>
 </div>
+
+<script>
+(function () {
+  var input = document.getElementById("search-input");
+  var btn = document.getElementById("search-btn");
+  var results = document.getElementById("search-results");
+
+  function clearResults() {
+    while (results.firstChild) results.removeChild(results.firstChild);
+  }
+
+  function showStatus(text) {
+    clearResults();
+    var p = document.createElement("p");
+    p.className = "search-status";
+    p.textContent = text;
+    results.appendChild(p);
+  }
+
+  function renderItems(items) {
+    clearResults();
+    items.forEach(function (item) {
+      var safeHref = /^https?:\/\//.test(item.link) ? item.link : "#";
+
+      var card = document.createElement("div");
+      card.className = "card search";
+
+      var meta = document.createElement("div");
+      meta.className = "card-meta";
+      var dateSpan = document.createElement("span");
+      dateSpan.textContent = item.pubDate
+        ? new Date(item.pubDate).toLocaleDateString("ko-KR")
+        : "";
+      meta.appendChild(dateSpan);
+      card.appendChild(meta);
+
+      var h3 = document.createElement("h3");
+      var a = document.createElement("a");
+      a.href = safeHref;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = item.title;
+      h3.appendChild(a);
+      card.appendChild(h3);
+
+      var desc = document.createElement("p");
+      desc.textContent = item.description;
+      card.appendChild(desc);
+
+      var go = document.createElement("a");
+      go.className = "go";
+      go.href = safeHref;
+      go.target = "_blank";
+      go.rel = "noopener";
+      go.textContent = "원문 보기 ↗";
+      card.appendChild(go);
+
+      results.appendChild(card);
+    });
+  }
+
+  async function runSearch() {
+    var q = input.value.trim();
+    if (!q) return;
+    showStatus("검색 중…");
+    try {
+      var res = await fetch("/api/search?q=" + encodeURIComponent(q));
+      var data = await res.json();
+      if (!res.ok) {
+        showStatus(data.error || "검색에 실패했습니다.");
+        return;
+      }
+      if (!data.items || data.items.length === 0) {
+        showStatus("검색 결과가 없습니다.");
+        return;
+      }
+      renderItems(data.items);
+    } catch (e) {
+      showStatus("네트워크 오류가 발생했습니다.");
+    }
+  }
+
+  btn.addEventListener("click", runSearch);
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") runSearch();
+  });
+})();
+</script>
 
 </body>
 </html>
